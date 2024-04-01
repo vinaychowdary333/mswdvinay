@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microblogging Platform</title>
+    <style>
+        /* CSS for styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .post {
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #fafafa;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        .post h3 {
+            margin-top: 0;
+        }
+        .post p {
+            margin-bottom: 5px;
+        }
+        .post .actions {
+            margin-top: 10px;
+        }
+        .post .actions button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+        .post .actions button:hover {
+            background-color: #45a049;
+        }
+        textarea {
+            width: calc(100% - 20px);
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Microblogging Platform</h1>
+        <textarea placeholder="What's on your mind?"></textarea>
+        <button id="postButton">Post</button>
+        <div id="posts"></div>
+    </div>
+
+    <script>
+        // JavaScript for dynamic functionality
+        const postButton = document.getElementById('postButton');
+        const postsContainer = document.getElementById('posts');
+
+        postButton.addEventListener('click', () => {
+            const text = document.querySelector('textarea').value.trim();
+            if (text !== '') {
+                const post = document.createElement('div');
+                post.className = 'post';
+                post.innerHTML = `
+                    <h3>Anonymous</h3>
+                    <p>${text}</p>
+                    <div class="actions">
+                        <button>Delete</button>
+                    </div>
+                `;
+                postsContainer.prepend(post);
+                document.querySelector('textarea').value = '';
+            }
+        });
+
+        postsContainer.addEventListener('click', (event) => {
+            if (event.target.tagName === 'BUTTON') {
+                event.target.closest('.post').remove();
+            }
+        });
+    </script>
+</body>
+</html>
